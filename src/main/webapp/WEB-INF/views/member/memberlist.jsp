@@ -7,27 +7,30 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 </head>
-<body>
-<form action="/member/register" method="post">
-  <fieldset>
-    <legend>사용자 정보 입력</legend>
-    <label for="userNm">이름:</label>
-    <input type="text" id="userNm" name="userNm"><br><br>
-    <label for="userId">아이디:</label>
-    <input type="text" id="userId" name="userId"><br><br>
-    <label for="passWd">비밀번호:</label>
-    <input type="password" id="passWd" name="passWd"><br><br>
-    <label for="nick">닉네임:</label>
-    <input type="text" id="nick" name="nick"><br><br>
-    <label for="phone">전화번호:</label>
-    <input type="text" id="phone" name="phone"><br><br>
-    <label for="email">이메일:</label>
-    <input type="text" id="email" name="email"><br><br>
-  </fieldset>
-  <br>
-  <input type="submit" value="제출">
-  
-</div>
-</form>
+    <table border="1">
+        <tr>
+            <th>이름</th>
+            <th>아이디</th>
+            <th>비밀번호</th>
+            <th>닉네임</th>
+            <th>전화번호</th>
+            <th>이메일</th>
+            <th>회원삭제</th>
+        </tr>
+        <c:forEach items="${memberList}" var="member">
+            <tr>
+                <td>${member.userNm}</td>
+                <td>${member.userId}</td>
+             	<td>${member.passWd}</td>
+                <td>${member.nick}</td>
+                <td>${member.phone}</td>
+                <td>${member.email}</td>
+                <td><a href="/member/deleteMember?userId=${member.userId}">회원 삭제</a></td>
+            </tr>
+        </c:forEach>
+         
+    </table>
+<!-- [ ] 글 수정으로 이동. 글번호를 넘겨야함. -->
+<a href="/member/updateMember">회원정보 수정</a>
 </body>
 </html>

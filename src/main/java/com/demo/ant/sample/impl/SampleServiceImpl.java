@@ -21,11 +21,22 @@ public class SampleServiceImpl implements SampleService{
 		return dao.selectAtworks();
 	}
 	
+	//회원등록
 	@Override
 	public void registerAtworks(SampleVO vo) throws Exception {
 		dao.registerAtworks(vo);
 		
 	}
-
 	
+	//회원정보변경
+	@Override
+	public void updateMemberPassword(SampleVO gvo) {
+		dao.updateMemberPassword(gvo);
+	}
+	
+	//화원삭제
+	@Override
+	public void deleteMember(String userId) {
+		dao.deleteMember(userId);
+	}
 }
