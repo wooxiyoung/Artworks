@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+		
+    <security:http pattern="/*.ico" security="none"/>
+    <security:http pattern="/assets/**" security="none"/>
+    <security:http pattern="/js/**" security="none"/>
+    <security:http pattern="/css/**" security="none"/>
+    <security:http pattern="/images/**" security="none"/>
+    <security:http pattern="/fonts/**" security="none"/> 
+    
+    <security:http use-expressions="true">
+        <security:csrf disabled="true"/>
+        <!-- root 경로 허용(메인) -->
+        <security:intercept-url pattern="/" access="permitAll" />
+        
+    <!-- 
+        회원가입 경로 허용
+        <security:intercept-url pattern="/register/**" access="permitAll()" />
+         -->
+         
+        <!-- 로그인 화면을 불러오기 위한 경로 허용 -->
+        <security:intercept-url pattern="${spring.security.login-page-url}" access="permitAll()"/>
+        <!-- 로그인 로직을 호출하기 위한 경로 허용 -->
+        <security:intercept-url pattern="${spring.security.filter-processes-url}" access="permitAll()"/>
+        <security:intercept-url pattern="${spring.security.authentication-failure-url}" access="permitAll()"/>
+        
+        
+        <security:intercept-url pattern="/**" access="permitAll()"/>
+
+        <!-- main 화면  경로 허용 -->
+        <!-- <security:intercept-url pattern="/main/**" access="permitAll()"/> -->  
+        <!-- 회원가입 화면  경로 허용 -->
+        <!-- <security:intercept-url pattern="/member/**" access="permitAll()"/> -->
+        <!-- <security:intercept-url pattern="/**/nosession/**" access="permitAll()"/> -->
+        
+        <!-- 위에서 정의한 패턴을 제외한 모든 경로는 인증된 사용자만 허용 -->
+        <!-- <security:intercept-url pattern="/**" access="isAuthenticated()"/> -->
+        <security:form-login
+                login-page="${spring.security.login-page-url}"
+                default-target-url="${spring.security.default-target-url}"
+                authentication-failure-url="${spring.security.authentication-failure-url}"/>
+                
+        <security:logout
+                success-handler-ref="logoutSuccessHandlerComposite"
+                invalidate-session="true"/>
+        <security:custom-filter before="FORM_LOGIN_FILTER" ref="formLoginFilter"/>
+    </security:http>
+    
+    <bean class="com.demo.ant.security.web.authentication.logout.LogoutSuccessEventPublishingLogoutSuccessHandler"/>
+
+    <!-- === Filter === -->
+    <bean id="formLoginFilter" class="org.springframework.web.filter.CompositeFilter">
+        <property name="filters">
+            <list>
+                <ref bean="loginAuthenticationProcessingFilter"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="loginAuthenticationProcessingFilter" class="com.demo.ant.security.web.authentication.LoginAuthenticationProcessingFilter">
+        <property name="filterProcessesUrl" value="${spring.security.filter-processes-url}"/>
+        <property name="obtainUsernameParameter" value="${spring.security.login-parameter.username}"/>
+        <property name="obtainPasswordParameter" value="${spring.security.login-parameter.password}"/>
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="authenticationSuccessHandler" ref="redirectLoginAuthenticationSuccessHandler"/>
+        <property name="authenticationFailureHandler" ref="redirectLoginAuthenticationFailurehandler"/>
+    </bean>
+
+    <!-- === AuthenticationSuccessHandler === -->
+    <bean id="redirectLoginAuthenticationSuccessHandler" class="com.demo.ant.security.web.authentication.RedirectLoginAuthenticationSuccessHandler">
+        <property name="defaultTargetUrl" value="${spring.security.default-target-url}"/>
+    </bean>
+
+    <!-- === AuthenticationFailureHandler === -->
+    <bean id="redirectLoginAuthenticationFailurehandler" class="com.demo.ant.security.web.authentication.RedirectLoginAuthenticationFailureHandler">
+    	<property name="usernameParameter" value="${spring.security.login-parameter.username}"/>
+        <property name="passwordParameter" value="${spring.security.login-parameter.password}"/>
+        <property name="defaultTargetUrl" value="${spring.security.authentication-failure-url}"/>
+    </bean>
+
+    <!-- === LogoutSuccessHandler === -->
+    <bean id="logoutSuccessHandlerComposite" class="com.demo.ant.security.web.authentication.logout.LogoutSuccessHandlerComposite">
+    	<constructor-arg>
+    		<list>
+    			<ref bean="redirectLogoutSuccessHandler"/>
+    			<ref bean="logoutSuccessEventPublishingLogoutSuccessHandler"/>
+    		</list>
+    	</constructor-arg>
+    </bean>
+    
+    <bean id="redirectLogoutSuccessHandler" class="com.demo.ant.security.web.authentication.logout.RedirectLogoutSuccessHandler">
+        <property name="logoutTargetUrl" value="${spring.security.login-page-url}"/>
+    </bean>
+    
+    <bean id="logoutSuccessEventPublishingLogoutSuccessHandler" class="com.demo.ant.security.web.authentication.logout.LogoutSuccessEventPublishingLogoutSuccessHandler"/>
+
+    <!-- === AuthenticationManager === -->
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="userDaoAuthenticationProvider"/>
+    </security:authentication-manager>
+
+    <!-- === AuthenticationProvider === -->
+    <bean id="userDaoAuthenticationProvider" class="com.demo.ant.security.web.authentication.dao.UserDaoAuthenticationProvider">
+        <property name="userDetailsService" ref="daoUserDetailsService"/>
+        <property name="passwordEncoder" ref="plainPasswordEncoder"/>
+        <property name="hideUserNotFoundExceptions" value="false"/>
+    </bean>
+
+    <bean id="plainPasswordEncoder" class="com.demo.ant.security.web.crypto.password.PlainPasswordEncoder"/>
+
+    <bean id="daoUserDetailsService" class="com.demo.ant.security.web.core.userdetails.DaoUserDetailsService"/>
+
+</beans>
