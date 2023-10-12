@@ -13,4 +13,17 @@
 	FROM atworks_user
 	WHERE 1=1
 </select>
+
+<insert id="registerAtworks" parameterType="com.demo.ant.sample.vo.SampleVO">
+    INSERT INTO atworks_user (USER_ID, USER_NM, PASSWD, NICK, PHONE, EMAIL)
+    VALUES 
+    (
+        #{userId},
+        #{userNm},
+        #{passWd},
+        #{nick},
+        #{phone},
+        #{email}
+    )
+</insert>
 </mapper>

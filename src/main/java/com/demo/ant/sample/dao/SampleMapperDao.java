@@ -9,4 +9,5 @@ import com.demo.data.annotation.PrimaryMapperRepository;
 public interface SampleMapperDao {
 	
 	public List<SampleVO> selectAtworks() throws Exception;
+	public void registerAtworks(SampleVO vo) throws Exception;
 }

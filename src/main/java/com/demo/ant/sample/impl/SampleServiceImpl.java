@@ -20,6 +20,12 @@ public class SampleServiceImpl implements SampleService{
 	public List<SampleVO> selectAtworks() throws Exception {
 		return dao.selectAtworks();
 	}
+	
+	@Override
+	public void registerAtworks(SampleVO vo) throws Exception {
+		dao.registerAtworks(vo);
+		
+	}
 
 	
 }

@@ -7,4 +7,6 @@ import com.demo.ant.sample.vo.SampleVO;
 public interface SampleService {
 
 	public List<SampleVO> selectAtworks() throws Exception;
+	public void registerAtworks(SampleVO vo) throws Exception;
+	
 }
