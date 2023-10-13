@@ -35,10 +35,10 @@ public class SampleServiceImpl implements SampleService{
 	}
 	
 	//화원삭제
-	@Override
-	public void deleteMember(String userId) {
-		dao.deleteMember(userId);
-	}
+	 @Override
+	 public int deleteMember(String userId) {
+			return dao.deleteMember(userId);
+		}
 	
 	//회원상세페이지
 	@Override

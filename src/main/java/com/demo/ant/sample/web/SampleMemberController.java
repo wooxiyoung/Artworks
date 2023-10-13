@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,10 +79,21 @@ public class SampleMemberController {
 		    return "redirect:/member/memberlist";
 		}
 		//회원삭제
-		@GetMapping("/deleteMember")
-		public String deleteMember(@RequestParam("userId") String userId) {
-		    sampleService.deleteMember(userId);
-		    return "redirect:/member/memberlist";
+	//	@GetMapping("/deleteMember")
+	//	public String deleteMember(@RequestParam("userId") String userId) {
+	//	    sampleService.deleteMember(userId);
+	//	    return "redirect:/member/memberlist";
+	//	}
+		
+		@RequestMapping(value = "/deleteMember", method = RequestMethod.POST)
+		public String deleteMember(@RequestParam("delete_user_ids") String[] delete_user_ids, ModelMap modelMap) throws Exception {
+			// 삭제할 사용자 ID마다 반복해서 사용자 삭제
+			for (String userId : delete_user_ids) {
+				System.out.println("사용자 삭제 = " + userId);
+				int delete_count = sampleService.deleteMember(userId);
+			}
+			// 목록 페이지로 이동
+			return "redirect:/member/memberlist";
 		}
 		
 }

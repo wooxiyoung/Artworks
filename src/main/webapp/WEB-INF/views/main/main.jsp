@@ -17,6 +17,8 @@
  
 <section class="main_wrap">
 	<main class="main">
+	<%@ include file="/WEB-INF/views/board/list.jsp" %>
+	
 	</main>
 </section>
 
