@@ -41,4 +41,9 @@
     WHERE USER_ID = #{userId}
 </delete>
 
+<!-- 회원상세페이지 -->
+<select id="detailMember" resultType="com.demo.ant.sample.vo.SampleVO">
+		select * from atworks_user where USER_ID = #{userId}
+</select>
+	
 </mapper>

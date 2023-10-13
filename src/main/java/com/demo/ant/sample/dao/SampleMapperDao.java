@@ -12,4 +12,7 @@ public interface SampleMapperDao {
 	public void registerAtworks(SampleVO vo) throws Exception;
 	public void updateMemberPassword(SampleVO gvo);
 	public void deleteMember(String userId);
+	
+	//회원 상세페이지
+	public SampleVO detailMember(String userId);
 }

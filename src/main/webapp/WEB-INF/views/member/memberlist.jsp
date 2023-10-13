@@ -17,20 +17,18 @@
             <th>이메일</th>
             <th>회원삭제</th>
         </tr>
-        <c:forEach items="${memberList}" var="member">
-            <tr>
-                <td>${member.userNm}</td>
-                <td>${member.userId}</td>
-             	<td>${member.passWd}</td>
-                <td>${member.nick}</td>
-                <td>${member.phone}</td>
-                <td>${member.email}</td>
-                <td><a href="/member/deleteMember?userId=${member.userId}">회원 삭제</a></td>
-            </tr>
-        </c:forEach>
-         
-    </table>
-<!-- [ ] 글 수정으로 이동. 글번호를 넘겨야함. -->
-<a href="/member/updateMember">회원정보 수정</a>
+<c:forEach items="${memberList}" var="member">
+    <tr>
+        <td>${member.userNm}</td>
+        <td><a href="/member/detailMember?userId=${member.userId}">${member.userId}</a></td>
+        <td>${member.passWd}</td>
+        <td>${member.nick}</td>
+        <td>${member.phone}</td>
+        <td>${member.email}</td>
+        <td><a href="/member/deleteMember?userId=${member.userId}">회원 삭제</a></td>
+    </tr>
+</c:forEach>
+</table>
+
 </body>
 </html>

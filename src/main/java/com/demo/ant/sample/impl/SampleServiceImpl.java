@@ -39,4 +39,10 @@ public class SampleServiceImpl implements SampleService{
 	public void deleteMember(String userId) {
 		dao.deleteMember(userId);
 	}
+	
+	//회원상세페이지
+	@Override
+	public SampleVO detailMember(String userId) {
+		return dao.detailMember(userId);
+	}
 }
