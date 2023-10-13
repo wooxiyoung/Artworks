@@ -9,8 +9,8 @@
 </head>
     <table border="1">
         <tr>
-            <th>이름</th>
             <th>아이디</th>
+            <th>이름</th>
             <th>비밀번호</th>
             <th>닉네임</th>
             <th>전화번호</th>
@@ -19,8 +19,8 @@
         </tr>
 <c:forEach items="${memberList}" var="member">
     <tr>
-        <td>${member.userNm}</td>
         <td><a href="/member/detailMember?userId=${member.userId}">${member.userId}</a></td>
+        <td>${member.userNm}</td>
         <td>${member.passWd}</td>
         <td>${member.nick}</td>
         <td>${member.phone}</td>
@@ -29,6 +29,6 @@
     </tr>
 </c:forEach>
 </table>
-
+<a href="/main">메인페이지 이동</a>
 </body>
 </html>

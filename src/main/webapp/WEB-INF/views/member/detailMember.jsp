@@ -19,25 +19,27 @@
 		<br>
 		<form action="/member/updateMember" method="post">
 			<table border=1 width=600>
+			<tr>
+					<td align=center>아이디</td>
+					<input type="hidden" name="userId" value="${member.userId}" /> 
+					<td>${member.userId}</td>
+				</tr>
 				<tr>
 					<td align=center>이름</td>
-					<td><input type="text" name="custname" value="${member.userNm}" size="10"></td>
+					<td><input type="text" name="userNm" value="${member.userNm}" size="10"></td>
 				</tr>
-				<tr>
-					<td align=center>아이디</td>
-					<td><input type="text" name="phone" value="${member.userId}" size="20"></td>
-				</tr>
+				
 				<tr>
 					<td align=center>비밀번호</td>
-					<td><input type="password" name="password" value="${member.passWd}" size="40"></td>
+					<td><input type="password" name="passWd" value="${member.passWd}" size="40"></td>
 				</tr>
 				<tr>
 					<td align=center>닉네임</td>
-					<td><input type="text" name="nickname" value="${member.nick}" size="40"></td>
+					<td><input type="text" name="nick" value="${member.nick}" size="40"></td>
 				</tr>
 				<tr>
 					<td align=center>전화번호</td>
-					<td><input type="text" name="phonenumber" value="${member.phone}" size="40"></td>
+					<td><input type="text" name="phone" value="${member.phone}" size="40"></td>
 				</tr>
 				<tr>
 					<td align=center>이메일</td>
@@ -45,7 +47,7 @@
 				</tr>
 				<tr>
 					<td colspan=2 align=center>
-					<input type=submit value="수정qjxms"></td>
+					<input type=submit value="수정"></td><a href="/main">메인페이지 이동</a>
 				</tr>
 			</table>
 		</form>

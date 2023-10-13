@@ -26,7 +26,7 @@
   </fieldset>
   <br>
   <input type="submit" value="제출">
-  
+  <a href="/main">메인페이지 이동</a>
 </div>
 </form>
 </body>

@@ -29,9 +29,14 @@
 </insert>
 
 <!-- 회원정보수정 -->
-<update id="updateMemberPassword" parameterType="com.demo.ant.sample.vo.SampleVO">
+<update id="updateMember" parameterType="com.demo.ant.sample.vo.SampleVO">
     UPDATE atworks_user
-    SET PASSWD = #{passWd}
+    SET
+        USER_NM = #{userNm},
+        PASSWD = #{passWd},
+        NICK = #{nick},
+        PHONE = #{phone},
+        EMAIL = #{email}
     WHERE USER_ID = #{userId}
 </update>
 

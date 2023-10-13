@@ -30,8 +30,8 @@ public class SampleServiceImpl implements SampleService{
 	
 	//회원정보변경
 	@Override
-	public void updateMemberPassword(SampleVO gvo) {
-		dao.updateMemberPassword(gvo);
+	public void updateMember(SampleVO gvo) {
+		dao.updateMember(gvo);
 	}
 	
 	//화원삭제

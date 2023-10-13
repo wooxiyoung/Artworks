@@ -39,7 +39,7 @@ public class SampleMemberController {
 			
 			sampleService.registerAtworks(vo);
 			
-			return "/member/register";
+			return "/main/main";
 		}
 		
 
@@ -70,13 +70,13 @@ public class SampleMemberController {
 		    return "/member/detailMember"; // detailMember 페이지로 이동
 		}
 		
-		//회원비밀번호수정
+		//회원정수정
 		@PostMapping("/updateMember")
-		public String postupdateMemberPassword(SampleVO vo) {
-			sampleService.updateMemberPassword(vo);
-			return "redirect:/member/memberlist";
+		public String updateMember(SampleVO vo) {
+			log.info("updateMember로그확인 " + vo.toString());
+		    sampleService.updateMember(vo);
+		    return "redirect:/member/memberlist";
 		}
-		
 		//회원삭제
 		@GetMapping("/deleteMember")
 		public String deleteMember(@RequestParam("userId") String userId) {
