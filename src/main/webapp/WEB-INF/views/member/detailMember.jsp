@@ -45,6 +45,9 @@
 					<td align=center>이메일</td>
 					<td><input type="email" name="email" value="${member.email}" size="40"></td>
 				</tr>
+					<td align=center>등급</td>
+					<td>${member.grade}</td>
+				
 				<tr>
 					<td colspan=2 align=center>
 					<input type=submit value="수정"></td><a href="/main">메인페이지 이동</a>

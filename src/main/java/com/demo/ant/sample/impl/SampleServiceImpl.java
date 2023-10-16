@@ -1,6 +1,7 @@
 package com.demo.ant.sample.impl;
 
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,8 @@ public class SampleServiceImpl implements SampleService{
 	
 	//회원정보변경
 	@Override
-	public void updateMember(SampleVO gvo) {
-		dao.updateMember(gvo);
+	public void updateMember(SampleVO vo) {
+		dao.updateMember(vo);
 	}
 	
 	//화원삭제
@@ -45,4 +46,11 @@ public class SampleServiceImpl implements SampleService{
 	public SampleVO detailMember(String userId) {
 		return dao.detailMember(userId);
 	}
+	
+	//로그인
+	@Override
+	public SampleVO loginMember(SampleVO vo) {
+		return dao.loginMember(vo);
+	}
+	
 }

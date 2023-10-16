@@ -8,6 +8,8 @@ public class SampleVO {
 	private		String	nick;
 	private		String	email;
 	private		String	phone;
+	private		String	grade;
+	
 	
 	public String getUserId() {
 		return userId;
@@ -46,12 +48,21 @@ public class SampleVO {
 		this.phone = phone;
 	}
 	
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "SampleVO [userId=" + userId + ", userNm=" + userNm + ", passWd=" + passWd + ", nick=" + nick
-				+ ", email=" + email + ", phone=" + phone + ", getUserId()=" + getUserId() + ", getUserNm()="
+				+ ", email=" + email + ", phone=" + phone + ", grade=" + grade + ",  getUserId()=" + getUserId() + ", getUserNm()="
 				+ getUserNm() + ", getPassWd()=" + getPassWd() + ", getNick()=" + getNick() + ", getEmail()="
-				+ getEmail() + ", getPhone()=" + getPhone() + ", getClass()=" + getClass() + ", hashCode()="
+				+ getEmail() + ", getPhone()=" + getPhone() + ",  getGrade()=" + getGrade() + ","
+						+ " getClass()=" + getClass() + ", hashCode()="
 				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}	
 	

@@ -23,6 +23,8 @@
     <input type="text" id="phone" name="phone"><br><br>
     <label for="email">이메일:</label>
     <input type="text" id="email" name="email"><br><br>
+    <input type="hidden" id="grade" name="grade" value="준회원">
+    
   </fieldset>
   <br>
   <input type="submit" value="제출">

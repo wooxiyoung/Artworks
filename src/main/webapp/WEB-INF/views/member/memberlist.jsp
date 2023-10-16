@@ -17,6 +17,7 @@
             <th>닉네임</th>
             <th>전화번호</th>
             <th>이메일</th>
+            <th>등급</th>
         </tr>
         <c:forEach items="${memberList}" var="member">
             <tr>
@@ -27,6 +28,8 @@
                 <td>${member.nick}</td>
                 <td>${member.phone}</td>
                 <td>${member.email}</td>
+                <td>${member.grade}</td>
+                
                 <!-- 다른 필드들... -->
             </tr>
         </c:forEach>

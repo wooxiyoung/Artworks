@@ -10,13 +10,14 @@
 		, NICK		AS	'nick'
 		, PHONE		AS 'phone'
 		, EMAIL		AS 'email'
+		, GRADE 	AS 'grade'
 	FROM atworks_user
 	WHERE 1=1
 </select>
 
 <!-- 회원등록 -->
 <insert id="registerAtworks" parameterType="com.demo.ant.sample.vo.SampleVO">
-    INSERT INTO atworks_user (USER_ID, USER_NM, PASSWD, NICK, PHONE, EMAIL)
+    INSERT INTO atworks_user (USER_ID, USER_NM, PASSWD, NICK, PHONE, EMAIL, GRADE)
     VALUES 
     (
         #{userId},
@@ -24,7 +25,8 @@
         #{passWd},
         #{nick},
         #{phone},
-        #{email}
+        #{email},
+        #{grade}
     )
 </insert>
 
@@ -36,7 +38,8 @@
         PASSWD = #{passWd},
         NICK = #{nick},
         PHONE = #{phone},
-        EMAIL = #{email}
+        EMAIL = #{email},
+        GRADE = #{grade}
     WHERE USER_ID = #{userId}
 </update>
 
@@ -50,5 +53,9 @@
 <select id="detailMember" resultType="com.demo.ant.sample.vo.SampleVO">
 		select * from atworks_user where USER_ID = #{userId}
 </select>
-	
+
+<!-- 로그인 -->
+<select id="loginMember" resultType="com.demo.ant.sample.vo.SampleVO">
+		select * from atworks_user where USER_ID = #{userId} and PASSWD = #{passWd}
+</select>	
 </mapper>

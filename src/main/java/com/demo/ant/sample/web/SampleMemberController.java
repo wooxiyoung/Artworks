@@ -3,6 +3,7 @@ package com.demo.ant.sample.web;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.demo.ant.sample.service.SampleService;
 import com.demo.ant.sample.vo.SampleVO;
@@ -95,5 +98,25 @@ public class SampleMemberController {
 			// 목록 페이지로 이동
 			return "redirect:/member/memberlist";
 		}
+		
+		//로그인기능
+		@GetMapping("/login")
+		public String getLoginMember() throws Exception {
+			return "/member/login";
+				}
+				
+		// 회원 로그인
+		@PostMapping("/login")
+		public String postloginMember(SampleVO vo, HttpSession session) {
+			
+			SampleVO Login = sampleService.loginMember(vo);
+			log.info("로그인로그 " + vo.toString());
+			if(Login!=null) {
+				session.setAttribute("LoginVo", Login);
+			}
+			
+			return "redirect:/main/main";
+		}
+		
 		
 }
