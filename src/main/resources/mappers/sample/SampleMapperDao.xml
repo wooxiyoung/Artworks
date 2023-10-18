@@ -56,6 +56,6 @@
 
 <!-- 로그인 -->
 <select id="loginMember" resultType="com.demo.ant.sample.vo.SampleVO">
-		select * from atworks_user where USER_ID = #{userId} and PASSWD = #{passWd}
+		select USER_ID,PASSWD from atworks_user where USER_ID = #{userId} and PASSWD = #{passWd}
 </select>	
 </mapper>

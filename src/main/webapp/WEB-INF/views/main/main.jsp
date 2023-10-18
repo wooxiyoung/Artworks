@@ -14,14 +14,13 @@
 <script>
 
 </script>
- 
-<section class="main_wrap">
-	<main class="main">
-	
-	</main>
-</section>
+
+	<section class="main_wrap">
+		<main class="main">
+		</main>
+	</section>
 
 
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+	<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

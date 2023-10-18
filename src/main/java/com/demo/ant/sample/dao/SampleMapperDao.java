@@ -16,5 +16,5 @@ public interface SampleMapperDao {
 	//회원 상세페이지
 	public SampleVO detailMember(String userId);
 	//로그인
-	public SampleVO loginMember(SampleVO vo);	
+	public SampleVO loginMember(SampleVO vo) throws Exception;
 }

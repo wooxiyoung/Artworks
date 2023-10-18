@@ -18,7 +18,7 @@
   </fieldset>
   <br>
   <input type="submit" value="로그인">
-  <a href="/main/main">메인페이지 이동</a>
+  <a href="/main">메인페이지 이동</a>
 </form>
 </body>
 </html>

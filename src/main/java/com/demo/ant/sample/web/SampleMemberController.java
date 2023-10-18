@@ -74,7 +74,7 @@ public class SampleMemberController {
 		    return "/member/detailMember"; // detailMember 페이지로 이동
 		}
 		
-		//회원정수정
+		//회원정보수정
 		@PostMapping("/updateMember")
 		public String updateMember(SampleVO vo) {
 			log.info("updateMember로그확인 " + vo.toString());
@@ -99,23 +99,37 @@ public class SampleMemberController {
 			return "redirect:/member/memberlist";
 		}
 		
-		//로그인기능
+		
+		//로그인
 		@GetMapping("/login")
-		public String getLoginMember() throws Exception {
+		public String getlogin() throws Exception {
 			return "/member/login";
-				}
-				
-		// 회원 로그인
-		@PostMapping("/login")
-		public String postloginMember(SampleVO vo, HttpSession session) {
+		}
+		
+		
+		@RequestMapping(value = "/login", method = RequestMethod.POST)
+		public String login(SampleVO vo, HttpServletRequest req, RedirectAttributes rttr) throws Exception{
+			log.info("post login");
 			
-			SampleVO Login = sampleService.loginMember(vo);
-			log.info("로그인로그 " + vo.toString());
-			if(Login!=null) {
-				session.setAttribute("LoginVo", Login);
+			HttpSession session = req.getSession();
+			SampleVO login = sampleService.loginMember(vo);
+			log.info("login멤버확인 " + vo.toString());
+			if(login == null) {
+				session.setAttribute("loginMember", null);
+				rttr.addFlashAttribute("msg", false);
+			}else {
+				session.setAttribute("loginMember", login);
 			}
 			
-			return "redirect:/main/main";
+			return "redirect:/";
+		}
+		
+		@RequestMapping(value = "/logout", method = RequestMethod.GET)
+		public String logout(HttpSession session) throws Exception{
+			
+			session.invalidate();
+			
+			return "redirect:/";
 		}
 		
 		

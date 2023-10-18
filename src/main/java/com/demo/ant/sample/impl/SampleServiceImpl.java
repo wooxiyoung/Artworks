@@ -17,6 +17,7 @@ public class SampleServiceImpl implements SampleService{
 	@Autowired
 	SampleMapperDao	dao;
 	
+	
 	@Override
 	public List<SampleVO> selectAtworks() throws Exception {
 		return dao.selectAtworks();
@@ -49,7 +50,7 @@ public class SampleServiceImpl implements SampleService{
 	
 	//로그인
 	@Override
-	public SampleVO loginMember(SampleVO vo) {
+	public SampleVO loginMember(SampleVO vo) throws Exception {
 		return dao.loginMember(vo);
 	}
 	

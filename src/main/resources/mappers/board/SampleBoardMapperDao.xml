@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.ant.sample.dao.SampleBoardMapperDao">
+
+<!-- 게시물 삭제 -->
+<delete id="deleteBoard" parameterType="com.demo.ant.sample.vo.SampleBoardVO">
+    DELETE FROM atworks_board
+    WHERE idx = #{idx}
+</delete>
+
+<!-- 게시물 수정 -->
+<update id="updateBoard" parameterType="com.demo.ant.sample.vo.SampleBoardVO">
+    UPDATE atworks_board
+    SET
+        title = #{title},
+        content = #{content},
+        userId = #{userId},
+        viewCnt = #{viewCnt},
+        updateTime = NOW()  <!-- 현재 시간으로 업데이트 시간 설정 -->
+    WHERE idx = #{idx}
+</update>
+
+<!-- 게시물 상세 조회 -->
+<select id="selectBoard" resultType="com.demo.ant.sample.vo.SampleBoardVO">
+    SELECT
+        idx,
+        title,
+        content,
+        userId,
+        viewCnt,
+        insertTime,
+        updateTime
+    FROM atworks_board
+    WHERE idx = #{idx}
+</select>
+
+<!-- 게시물 추가 -->
+<insert id="insertBoard" parameterType="com.demo.ant.sample.vo.SampleBoardVO">
+    INSERT INTO atworks_board (title, content, userId, viewCnt, insertTime, updateTime)
+    VALUES
+    (
+        #{title},
+        #{content},
+        #{userId},
+        #{viewCnt},
+        NOW(),  <!-- 현재 시간으로 추가 시간 설정 -->
+        NOW()   <!-- 현재 시간으로 업데이트 시간 설정 -->
+    )
+</insert>
+
+<select id="getBoardList" resultType="com.demo.ant.sample.vo.SampleBoardVO">
+        SELECT * FROM atworks_board
+    </select>
+
+</mapper>
